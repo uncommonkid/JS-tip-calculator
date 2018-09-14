@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JavaScript Tip Calculator</title>
+
+<style>
+	body{
+		
+		background-image: url(restaurants.jpg);
+		background-size: 1920px 1080px;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+
+	#container{
+		  height: 550px;
+		  width: 360px;
+		  margin: 150px auto;
+		  background: #f7f7f7;
+		  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+		  border-radius: 20px;
+		  -webkit-border-radius: 20px;
+		  -moz-border-radius: 20px;
+
+	}
+
+	p{
+		padding-left: 20px;
+	}
+
+	h1{
+		background: #000000;
+		height: 25px;
+		color:white;
+		margin: 0;
+  		padding: 10px 100px;
+  		text-transform: uppercase;
+		font-size: 18px;
+		font-weight: normal;
+		border-top-left-radius: 20px;
+  		border-top-right-radius: 20px;
+	}
+	#billAmount{
+		padding: 5px 10px 5px 10px; 
+	}
+	#service{
+		padding: 5px 10px 5px 10px;  		
+ 		font-size: 15px;
+	}
+	#numPeople{
+		padding: 5px 10px 5px 10px; 
+		
+	}
+	#totalTip{
+		text-align: center;
+		font-weight: bold;
+		display: block;
+  		
+	}
+
+	button{
+		height:50px;
+		width: 200px;
+		background-color: #BC3E1A;
+  		margin: 30px auto;
+  		border-radius: 5px;
+  		text-transform: uppercase;
+  		font-weight: bold;
+  		font-size: 17px;
+  		display: block;
+  		box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  		color:white;
+  	}
+
+	</style>
+
+</head>
+
+<body>
+	<!-- The div tag divides section of html usually for containers and the like -->
+	<div id="container">
+		<h1>Tip Calculator</h1>
+		<div id="Calculator">
+			<form>
+				<p>How Much Was Your Bill?</p>
+				 	<p><input type="text" id="billAmount" placeholder="$ Bill Amount"></p>
+				<br>
+				<p>How Was Your Service Today?</p>
+					<p><select id="service">
+							<Option disabled selected value="0">--Choose an Option--</Option>
+							<Option value="0.3">Fantastic 30%</Option>
+							<Option value="0.2">Good 20%</Option>
+							<Option value="0.15">Neither Good Nor Bad 15%</Option>
+							<Option value="0.1">Bad 10%</Option>
+							<Option value="0.05">Terrible 5%</Option>
+							
+						</select>
+					</form>
+
+					</p>
+					<br>
+				<p>How Many People Are Sharing The Bill?</p>
+					<p><input type="text" id="numPeople" placeholder="# of People"></p>
+
+				<br>	
+				<button type="button" id="calculate">Calculate!</button>
+					
+				</div>
+
+				<!-- Calcultator part over -->
+
+			<div id="totalTip">
+				<sup>$</sup>
+				<span id="tip">0.00</span>
+				<small id="each">each</small>
+			</div>
+
+			<!-- totalTip end-->			
+		</div>
+	</div>
+
+</body>
+
+	<script>
+		function calculateTip(){
+			var billAmount = document.getElementById("billAmount").value;
+			var service = document.getElementById("service").value;
+			var numPeople = document.getElementById("numPeople").value;
+			
+			//validating input
+			if(billAmount === ""|| service==0){
+				alert("You forgot to enter values");
+				return;
+			}
+
+			//looks to see if input is empty or <= 1
+			if (numPeople === "" || numPeople <= 1) {
+			    numPeople = 1;
+			    document.getElementById("each").style.display = "none";
+			  } else {
+			    document.getElementById("each").style.display = "block";
+			  }
+
+
+			//main Tip calculating
+			var total= (billAmount*service)/numPeople;
+			total = Math.round(total*100) /100;
+
+			//display tip
+			document.getElementById("totalTip").style.display="block";
+			document.getElementById("tip").innerHTML = total;
+
+		}
+
+		//Hide the tip amount on load
+			document.getElementById("totalTip").style.display = "none";
+			document.getElementById("each").style.display = "none";
+
+			document.getElementById("calculate").onclick = function() {
+	  		calculateTip();
+		};
+</script>
+
+
+
+
+
+
+</html>
